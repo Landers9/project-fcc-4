@@ -137,6 +137,12 @@ app.get('/api/users/:_id/logs', async (req, res) => {
       logs = logs.slice(0, parseInt(limit));
     }
 
+    logs = logs.map(log => ({
+      description: log.description,
+      duration: log.duration,
+      date: new Date(log.date).toDateString()
+    }));
+
     res.json({
       username: user.username,
       count: logs.length,
